@@ -1,0 +1,8 @@
+.folder {
+    cursor: pointer;
+    background-color: rgb(209, 209, 209);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 80%;
+}

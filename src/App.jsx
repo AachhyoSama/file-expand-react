@@ -1,9 +1,10 @@
+import { useState } from "react";
 import Folder from "./components/Folder";
 import explorer from "./data/folderData";
-import "./index.css";
 
-function App() {
+const App = () => {
+    const [explorerData, setExplorerData] = useState(explorer);
     return <Folder explorer={explorer} />;
-}
+};
 
 export default App;

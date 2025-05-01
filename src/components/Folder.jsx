@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Folder = ({ explorer }) => {
+const Folder = ({ handleInsertNode, explorer }) => {
     const [expand, setExpand] = useState(false);
     const [showInput, setShowInput] = useState({
         visible: false,
@@ -19,6 +19,7 @@ const Folder = ({ explorer }) => {
     const onAddFolder = (e) => {
         // 13 is the code for "Enter" button on keyboard
         if (e.keyCode == 13 && e.target.value) {
+            handleInsertNode(explorer.id, e.target.value, showInput.isFolder);
             // close the input
             setShowInput({ ...showInput, visible: false });
         }
@@ -72,7 +73,11 @@ const Folder = ({ explorer }) => {
                         </span>
                     )}
                     {explorer.items.map((item) => (
-                        <Folder explorer={item} key={item.id} />
+                        <Folder
+                            handleInsertNode={handleInsertNode}
+                            explorer={item}
+                            key={item.id}
+                        />
                     ))}
                 </div>
             </div>

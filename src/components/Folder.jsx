@@ -16,6 +16,14 @@ const Folder = ({ handleInsertNode, explorer }) => {
         });
     };
 
+    const handleDelete = (e) => {
+        e.stopPropagation();
+    };
+
+    const handleEdit = (e) => {
+        e.stopPropagation();
+    };
+
     const onAddFolder = (e) => {
         // 13 is the code for "Enter" button on keyboard
         if (e.keyCode == 13 && e.target.value) {
@@ -33,6 +41,18 @@ const Folder = ({ handleInsertNode, explorer }) => {
                         {expand ? "-" : "+"} 🗂️ {explorer.name}
                     </span>
                     <div>
+                        <button
+                            className="folder-button"
+                            onClick={(e) => handleDelete(e)}
+                        >
+                            🗑️
+                        </button>
+                        <button
+                            className="folder-button"
+                            onClick={(e) => handleEdit(e)}
+                        >
+                            📑
+                        </button>
                         <button
                             className="folder-button"
                             onClick={(e) => handleAddFolder(e, true)}
@@ -86,6 +106,20 @@ const Folder = ({ handleInsertNode, explorer }) => {
         return (
             <div className="file">
                 <span>📄 {explorer.name}</span>
+                <div>
+                    <button
+                        className="folder-button"
+                        onClick={(e) => handleDelete(e)}
+                    >
+                        🗑️
+                    </button>
+                    <button
+                        className="folder-button"
+                        onClick={(e) => handleEdit(e)}
+                    >
+                        📑
+                    </button>
+                </div>
             </div>
         );
     }

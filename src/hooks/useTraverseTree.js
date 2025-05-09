@@ -12,15 +12,38 @@ const useTraverseTree = () => {
             return tree; // updated tree
         }
 
-        let latestNode = [];
-        latestNode = tree.items.map((obj) => {
-            return insertNode(obj, folderId, item, isFolder);
-        });
+        const updatedItems = tree.items.map((child) =>
+            insertNode(child, folderId, item, isFolder)
+        );
 
-        return { ...tree, items: latestNode };
+        return { ...tree, items: updatedItems };
     };
 
-    return { insertNode };
+    const deleteNode = (tree, folderId) => {
+        if (tree.id === folderId) {
+            return null; // remove the node
+        }
+
+        const updatedItems = tree.items
+            .map((child) => deleteNode(child, folderId))
+            .filter((child) => child !== null); // filter out null values
+
+        return { ...tree, items: updatedItems };
+    };
+
+    const editNode = (tree, folderId, newName) => {
+        if (tree.id === folderId) {
+            return { ...tree, name: newName }; // update the name
+        }
+
+        const updatedItems = tree.items.map((child) =>
+            editNode(child, folderId, newName)
+        );
+
+        return { ...tree, items: updatedItems };
+    };
+
+    return { insertNode, deleteNode, editNode };
 };
 
 export default useTraverseTree;

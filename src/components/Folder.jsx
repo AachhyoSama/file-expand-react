@@ -1,35 +1,46 @@
 import { useState } from "react";
 
-const Folder = ({ handleInsertNode, explorer }) => {
+const Folder = ({
+    handleInsertNode,
+    handleDeleteNode,
+    handleEditNode,
+    explorer,
+}) => {
     const [expand, setExpand] = useState(false);
     const [showInput, setShowInput] = useState({
         visible: false,
         isFolder: null,
     });
+    const [editMode, setEditMode] = useState(false);
+    const [editText, setEditText] = useState(explorer.name);
 
     const handleAddFolder = (e, isFolder) => {
         e.stopPropagation();
         setExpand(true);
-        setShowInput({
-            visible: true,
-            isFolder,
-        });
+        setShowInput({ visible: true, isFolder });
     };
 
     const handleDelete = (e) => {
         e.stopPropagation();
+        handleDeleteNode(explorer.id);
     };
 
     const handleEdit = (e) => {
         e.stopPropagation();
+        setEditMode(true);
     };
 
     const onAddFolder = (e) => {
-        // 13 is the code for "Enter" button on keyboard
-        if (e.keyCode == 13 && e.target.value) {
+        if (e.keyCode === 13 && e.target.value) {
             handleInsertNode(explorer.id, e.target.value, showInput.isFolder);
-            // close the input
-            setShowInput({ ...showInput, visible: false });
+            setShowInput({ visible: false, isFolder: null });
+        }
+    };
+
+    const onEdit = (e) => {
+        if (e.keyCode === 13 && e.target.value) {
+            handleEditNode(explorer.id, e.target.value);
+            setEditMode(false);
         }
     };
 
@@ -38,19 +49,27 @@ const Folder = ({ handleInsertNode, explorer }) => {
             <div className="container">
                 <div className="folder" onClick={() => setExpand(!expand)}>
                     <span>
-                        {expand ? "-" : "+"} 🗂️ {explorer.name}
+                        {expand ? "-" : "+"} 🗂️{" "}
+                        {editMode ? (
+                            <input
+                                value={editText}
+                                onChange={(e) => setEditText(e.target.value)}
+                                onKeyDown={onEdit}
+                                onClick={(e) => e.stopPropagation()}
+                                autoFocus
+                            />
+                        ) : (
+                            explorer.name
+                        )}
                     </span>
                     <div>
                         <button
                             className="folder-button"
-                            onClick={(e) => handleDelete(e)}
+                            onClick={handleDelete}
                         >
                             🗑️
                         </button>
-                        <button
-                            className="folder-button"
-                            onClick={(e) => handleEdit(e)}
-                        >
+                        <button className="folder-button" onClick={handleEdit}>
                             📑
                         </button>
                         <button
@@ -67,8 +86,6 @@ const Folder = ({ handleInsertNode, explorer }) => {
                         </button>
                     </div>
                 </div>
-
-                {/* this is the part to be expanded */}
                 <div
                     style={{
                         marginLeft: 25,
@@ -82,21 +99,23 @@ const Folder = ({ handleInsertNode, explorer }) => {
                                 className="inputContainer"
                                 type="text"
                                 autoFocus
-                                onBlur={() => {
+                                onBlur={() =>
                                     setShowInput({
-                                        ...showInput,
                                         visible: false,
-                                    });
-                                }}
+                                        isFolder: null,
+                                    })
+                                }
                                 onKeyDown={onAddFolder}
                             />
                         </span>
                     )}
                     {explorer.items.map((item) => (
                         <Folder
-                            handleInsertNode={handleInsertNode}
-                            explorer={item}
                             key={item.id}
+                            explorer={item}
+                            handleInsertNode={handleInsertNode}
+                            handleDeleteNode={handleDeleteNode}
+                            handleEditNode={handleEditNode}
                         />
                     ))}
                 </div>
@@ -105,18 +124,25 @@ const Folder = ({ handleInsertNode, explorer }) => {
     } else {
         return (
             <div className="file">
-                <span>📄 {explorer.name}</span>
+                <span>
+                    📄{" "}
+                    {editMode ? (
+                        <input
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)}
+                            onKeyDown={onEdit}
+                            onClick={(e) => e.stopPropagation()}
+                            autoFocus
+                        />
+                    ) : (
+                        explorer.name
+                    )}
+                </span>
                 <div>
-                    <button
-                        className="folder-button"
-                        onClick={(e) => handleDelete(e)}
-                    >
+                    <button className="folder-button" onClick={handleDelete}>
                         🗑️
                     </button>
-                    <button
-                        className="folder-button"
-                        onClick={(e) => handleEdit(e)}
-                    >
+                    <button className="folder-button" onClick={handleEdit}>
                         📑
                     </button>
                 </div>

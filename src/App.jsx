@@ -7,7 +7,7 @@ const App = () => {
     const [explorerData, setExplorerData] = useState(explorer);
 
     // get the hook here
-    const { insertNode } = useTraverseTree();
+    const { insertNode, deleteNode, editNode } = useTraverseTree();
 
     const handleInsertNode = (folderId, item, isFolder) => {
         const updatedTree = insertNode(explorerData, folderId, item, isFolder);
@@ -15,7 +15,26 @@ const App = () => {
         setExplorerData(updatedTree);
     };
 
-    return <Folder handleInsertNode={handleInsertNode} explorer={explorer} />;
+    const handleDeleteNode = (folderId) => {
+        const updatedTree = deleteNode(explorerData, folderId);
+
+        setExplorerData(updatedTree);
+    };
+
+    const handleEditNode = (folderId, newName) => {
+        const updatedTree = editNode(explorerData, folderId, newName);
+
+        setExplorerData(updatedTree);
+    };
+
+    return (
+        <Folder
+            explorer={explorerData}
+            handleInsertNode={handleInsertNode}
+            handleDeleteNode={handleDeleteNode}
+            handleEditNode={handleEditNode}
+        />
+    );
 };
 
 export default App;

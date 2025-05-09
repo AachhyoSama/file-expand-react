@@ -9,6 +9,7 @@ A simple and lightweight clone of the VS Code file explorer sidebar, built using
 - 🧠 Recursive rendering of nested folders
 - 💡 Clean, VS Code-inspired UI
 - 💅 Styled with CSS
+- 🗂️ Add, Delete and Edit the file and folder
 
 ## 🚀 Tech Stack
 

@@ -11,7 +11,7 @@
     padding: 5px 20px;
     border-radius: 5px;
     margin-bottom: 5px;
-    width: 60%;
+    width: 30%;
 }
 
 .file {
@@ -21,17 +21,25 @@
     cursor: pointer;
     padding: 7px;
     margin-bottom: 5px;
-    width: 60%;
+    width: 30%;
     border-bottom: 1px solid black;
 }
 
 .folder-button {
     cursor: pointer;
     margin: 2px;
-    background-color: rgb(28, 112, 239);
+    background-color: rgb(35, 155, 43);
     color: white;
     padding: 5px;
     border-radius: 4px;
+}
+
+.delete-button {
+    background-color: rgb(234, 94, 94);
+}
+
+.edit-button {
+    background-color: rgb(50, 114, 167);
 }
 
 .inputContainer {

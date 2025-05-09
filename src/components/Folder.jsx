@@ -65,15 +65,6 @@ const Folder = ({
                     <div>
                         <button
                             className="folder-button"
-                            onClick={handleDelete}
-                        >
-                            🗑️
-                        </button>
-                        <button className="folder-button" onClick={handleEdit}>
-                            📑
-                        </button>
-                        <button
-                            className="folder-button"
                             onClick={(e) => handleAddFolder(e, true)}
                         >
                             + 🗂️
@@ -83,6 +74,19 @@ const Folder = ({
                             onClick={(e) => handleAddFolder(e, false)}
                         >
                             + 📄
+                        </button>
+
+                        <button
+                            className="folder-button edit-button"
+                            onClick={handleEdit}
+                        >
+                            ✍️
+                        </button>
+                        <button
+                            className="folder-button delete-button"
+                            onClick={handleDelete}
+                        >
+                            🗑️
                         </button>
                     </div>
                 </div>
@@ -139,11 +143,17 @@ const Folder = ({
                     )}
                 </span>
                 <div>
-                    <button className="folder-button" onClick={handleDelete}>
-                        🗑️
+                    <button
+                        className="folder-button edit-button"
+                        onClick={handleEdit}
+                    >
+                        ✍️
                     </button>
-                    <button className="folder-button" onClick={handleEdit}>
-                        📑
+                    <button
+                        className="folder-button delete-button"
+                        onClick={handleDelete}
+                    >
+                        🗑️
                     </button>
                 </div>
             </div>

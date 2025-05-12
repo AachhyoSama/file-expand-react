@@ -5,6 +5,7 @@ import useTraverseTree from "./hooks/useTraverseTree";
 
 const App = () => {
     const [explorerData, setExplorerData] = useState(explorer);
+    const [theme, setTheme] = useState("light"); // 'light' or 'dark'
 
     // get the hook here
     const { insertNode, deleteNode, editNode } = useTraverseTree();
@@ -27,13 +28,23 @@ const App = () => {
         setExplorerData(updatedTree);
     };
 
+    // Function to toggle the theme
+    const toggleTheme = () => {
+        setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    };
+
     return (
-        <Folder
-            explorer={explorerData}
-            handleInsertNode={handleInsertNode}
-            handleDeleteNode={handleDeleteNode}
-            handleEditNode={handleEditNode}
-        />
+        <div className={`app-container ${theme}`}>
+            <button className="theme-toggle" onClick={toggleTheme}>
+                {theme === "light" ? "🌙" : "☀️"}
+            </button>
+            <Folder
+                explorer={explorerData}
+                handleInsertNode={handleInsertNode}
+                handleDeleteNode={handleDeleteNode}
+                handleEditNode={handleEditNode}
+            />
+        </div>
     );
 };
 

@@ -10,6 +10,7 @@ A simple and lightweight clone of the VS Code file explorer sidebar, built using
 - 💡 Clean, VS Code-inspired UI
 - 💅 Styled with CSS
 - 🗂️ Add, Delete and Edit the file and folder
+- 🌙 Toggle between dark and light modes
 
 ## 🚀 Tech Stack
 

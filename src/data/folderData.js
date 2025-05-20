@@ -66,6 +66,36 @@ const explorer = {
             isFolder: false,
             items: [],
         },
+        {
+            id: "12",
+            name: "package-lock.json",
+            isFolder: false,
+            items: [],
+        },
+        {
+            id: "13",
+            name: "README.md",
+            isFolder: false,
+            items: [],
+        },
+        {
+            id: "14",
+            name: "LICENSE",
+            isFolder: false,
+            items: [],
+        },
+        {
+            id: "15",
+            name: ".gitignore",
+            isFolder: false,
+            items: [],
+        },
+        {
+            id: "16",
+            name: ".env",
+            isFolder: false,
+            items: [],
+        },
     ],
 };
 
